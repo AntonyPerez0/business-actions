@@ -1,10 +1,10 @@
-name: Deploy
+name: Test
 on:
-  push:
+  pull_request:
     branches: [main]
 jobs:
-  build:
-    name: Build and Deploy
+  test:
+    name: Test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -12,7 +12,4 @@ jobs:
         with:
           node-version: 16.x
       - run: npm ci
-      - run: npm run build
-      # Add your railway deployment command here
-      - name: Deploy
-        run: echo "Deploying to production..."
+      - run: npm test
